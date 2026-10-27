@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Awesome Harness Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,620&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3efe6;
+    --paper-2: #e7e0d2;
+    --ink: #1c1915;
+    --muted: #5e584e;
+    --line: #d4cbb8;
+    --terra: #8f3d24;
+    --pine: #1e4638;
+    --card: #faf7f1;
+    --mark: #efe2c6;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 500px at 10% -10%, #efe6d4 0%, transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    font-family: "Source Sans 3", "Iowan Old Style", Palatino, serif;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+  body.en .zh { display: none !important; }
+  body:not(.en) .en { display: none !important; }
+  a { color: var(--terra); text-underline-offset: 3px; }
+  header.top {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; justify-content: space-between; gap: 16px; align-items: center;
+    padding: 14px 7vw;
+    background: rgba(243, 239, 230, 0.92);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+  }
+  .brand { font-family: Fraunces, Georgia, serif; font-weight: 620; letter-spacing: -0.03em; }
+  nav { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; font-size: 15px; }
+  nav a { color: var(--ink); text-decoration: none; }
+  nav a:hover { color: var(--terra); }
+  .lang { border: 1px solid var(--ink); background: transparent; padding: 4px 10px; cursor: pointer; font: inherit; }
+  .lang[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  main { width: min(1080px, 86vw); margin: 0 auto; padding-bottom: 80px; }
+  .hero { padding: 56px 0 20px; }
+  .kicker { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pine); }
+  h1 { font-family: Fraunces, Georgia, serif; font-weight: 460; font-size: clamp(40px, 6vw, 76px); line-height: 0.96; letter-spacing: -0.035em; margin: 10px 0 18px; }
+  .lede { font-size: 22px; max-width: 42rem; }
+  .meta { color: var(--muted); font-size: 15px; }
+  h2 { font-family: Fraunces, Georgia, serif; font-weight: 560; font-size: 34px; letter-spacing: -0.03em; margin: 56px 0 12px; }
+  h3 { font-family: Fraunces, Georgia, serif; font-size: 22px; margin: 0 0 8px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .layer, .card { background: var(--card); border: 1px solid var(--line); padding: 16px 16px 14px; }
+  .layer strong { display: block; font-family: Fraunces, Georgia, serif; font-size: 20px; }
+  .layer span, .card p { color: var(--muted); font-size: 15px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--card); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .tag { display: inline-block; margin-right: 6px; padding: 1px 7px; background: var(--mark); font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.04em; }
+  .call { border-left: 3px solid var(--terra); padding: 4px 0 4px 16px; margin: 18px 0; font-size: 20px; }
+  footer { width: min(1080px, 86vw); margin: 0 auto 48px; color: var(--muted); font-size: 14px; }
+  @media (max-width: 800px) {
+    .grid, .cards { grid-template-columns: 1fr; }
+    header.top { padding: 12px 20px; }
+    main, footer { width: min(100% - 32px, 1080px); }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">Harness Engineering</div>
+  <nav>
+    <a href="#layers" class="zh">八层</a><a href="#layers" class="en">Layers</a>
+    <a href="#cases" class="zh">案例</a><a href="#cases" class="en">Cases</a>
+    <a href="#matrix" class="zh">对照</a><a href="#matrix" class="en">Matrix</a>
+    <a href="#practice" class="zh">实践</a><a href="#practice" class="en">Practice</a>
+    <a href="docs/report.zh.md" class="zh">全文</a>
+    <a href="docs/report.en.md" class="en">Full report</a>
+    <button class="lang" id="zh" aria-pressed="true">中文</button>
+    <button class="lang" id="en" aria-pressed="false">EN</button>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <div class="kicker">Field report · 2026-10-27</div>
+    <h1 class="zh">模型外面的那层壳，<br>才是工程。</h1>
+    <h1 class="en">The engineering is the shell around the model.</h1>
+    <p class="lede zh">Harness 不是更长的 prompt。它是工具、权限、记忆、技能、编排和验收回路。这份报告对照 Claude Code、Cowork、Design、Duet、Codex、OpenCode、DeepSeek Harness、Grok Build、Grok Bot、Hermes 与 Muse。</p>
+    <p class="lede en">A harness is not a longer prompt. It is tools, permissions, memory, skills, orchestration, and a check that can fail. This report reads Claude Code, Cowork, Design, Duet, Codex, OpenCode, DeepSeek Harness, Grok Build, Grok Bot, Hermes, and Muse against that definition.</p>
+    <p class="meta zh">星标是 2026-10-27 的 GitHub API 快照，不是排名。X 实时搜索当时没有登录态，社区实践只引用公开仓库和厂商文章。</p>
+    <p class="meta en">Stars are a GitHub API snapshot from 2026-10-27, not a ranking. Live X search was unauthenticated, so community practice is cited from public repos and vendor essays.</p>
+    <p class="call zh">Anthropic 点名三种失效：做到一半就收工，给自己的结论打高分，压缩之后忘掉“不要做 X”。动态工作流的意义，是给子任务一块干净的上下文。</p>
+    <p class="call en">Anthropic names three failures: stopping early, preferring your own findings, and losing “do not do X” after compaction. Dynamic workflows exist to give a subtask a clean context.</p>
+  </section>
+
+  <section id="layers">
+    <h2 class="zh">八层</h2><h2 class="en">Eight layers</h2>
+    <div class="grid">
+      <div class="layer"><strong class="zh">循环</strong><strong class="en">Loop</strong><span class="zh">可中断的主循环，加上 headless 单次执行。</span><span class="en">An interruptible main loop, plus a headless one-shot.</span></div>
+      <div class="layer"><strong class="zh">上下文</strong><strong class="en">Context</strong><span class="zh">窗口是稀缺资源。启动只加载技能名。</span><span class="en">The window is scarce. Load skill names first.</span></div>
+      <div class="layer"><strong class="zh">记忆</strong><strong class="en">Memory</strong><span class="zh">规则进仓库。计划进磁盘。摘要不能覆盖约束。</span><span class="en">Rules in git. Plans on disk. Summaries do not override constraints.</span></div>
+      <div class="layer"><strong class="zh">能力</strong><strong class="en">Capability</strong><span class="zh">Skills、MCP、插件、LSP。渐进披露。</span><span class="en">Skills, MCP, plugins, LSP. Progressive disclosure.</span></div>
+      <div class="layer"><strong class="zh">权限</strong><strong class="en">Permission</strong><span class="zh">询问、沙箱、删除必确认。</span><span class="en">Ask, sandbox, confirm deletes.</span></div>
+      <div class="layer"><strong class="zh">编排</strong><strong class="en">Orchestration</strong><span class="zh">子代理、工作流、群组、会话消息。</span><span class="en">Subagents, workflows, groups, session messages.</span></div>
+      <div class="layer"><strong class="zh">表面</strong><strong class="en">Surface</strong><span class="zh">终端、IDE、桌面、手机、IM、定时，最好同一引擎。</span><span class="en">Terminal, IDE, desktop, phone, chat, cron. Preferably one engine.</span></div>
+      <div class="layer"><strong class="zh">验收</strong><strong class="en">Acceptance</strong><span class="zh">“看起来好了”不是信号。</span><span class="en">“Looks done” is not a signal.</span></div>
+    </div>
+  </section>
+
+  <section id="cases">
+    <h2 class="zh">案例</h2><h2 class="en">Cases</h2>
+    <div class="cards">
+      <article class="card">
+        <h3><a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview">Claude Code</a></h3>
+        <p><span class="tag">ANTHROPIC</span><span class="tag">CODE</span></p>
+        <p class="zh">终端、IDE、桌面、Web 共用引擎。<code>CLAUDE.md</code> 与 MCP 跨表面。2026-06 的动态工作流用 <code>agent()</code>、<code>parallel()</code>、<code>pipeline()</code> 写任务专用 harness，可隔离到 worktree。失败模式写进了公开文章。</p>
+        <p class="en">One engine across terminal, IDE, desktop, and web. Dynamic workflows, June 2026, compose <code>agent()</code>, <code>parallel()</code>, and <code>pipeline()</code>, with worktree isolation. The failure modes are public.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://claude.com/product/cowork">Claude Cowork</a></h3>
+        <p><span class="tag">WORK</span></p>
+        <p class="zh">口语里的 “Claude Work” 更接近它：在选定文件夹和工具里把活做到可审查的文件。合上电脑继续，可定时。删除要批准。企业权限可进 SIEM。</p>
+        <p class="en">The closest thing to “Claude Work”: finish the job in chosen folders and tools, leave a reviewable file, keep going with the laptop closed. Deletes need approval.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://claude.com/product/design">Claude Design</a></h3>
+        <p><span class="tag">DESIGN</span></p>
+        <p class="zh">从真实组件和设计系统出图，画布上改，<code>/design-sync</code> 接回 Claude Code。可导出到 Adobe、Canva、Figma 以外的 Gamma、Lovable、Miro、Replit、Vercel、Wix。独立站开放到 2026-12-14。</p>
+        <p class="en">Builds from real components, edits on canvas, and hands back to Claude Code with <code>/design-sync</code>. Connectors include Adobe, Canva, Gamma, Lovable, Miro, Replit, Vercel, and Wix.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://claude.com/product/claude-duet">Claude Duet</a></h3>
+        <p><span class="tag">PROACTIVE</span></p>
+        <p class="zh">2026-10-21 研究预览。早上简报，只在需要判断时打扰，人离开后继续。凭证沿用 Managed Agents，自动模式沿用 Claude Code。6,000+ 连接器。人从盯终端改为例外处理。</p>
+        <p class="en">Research preview, 2026-10-21. Morning brief, interrupt only for judgment, continue while you are away. Credentials follow Managed Agents. The human handles exceptions.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://github.com/openai/codex">Codex</a></h3>
+        <p><span class="tag">131,021 ★</span><span class="tag">RUST</span></p>
+        <p class="zh">本地 CLI、IDE、桌面 <code>codex app</code>、云端 Codex Web。Apache-2.0。贡献是停留时间：人看着的仓库，和人离开后的仓库，是同一代理的两种门。</p>
+        <p class="en">Local CLI, IDE, desktop app, and Codex Web. Apache-2.0. The contribution is dwell time: the same agent, two doors, depending on whether you stay.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://github.com/anomalyco/opencode">OpenCode</a></h3>
+        <p><span class="tag">221,881 ★</span><span class="tag">MIT</span></p>
+        <p class="zh"><code>build</code> 全权限，<code>plan</code> 默认不改文件。Tab 切换。权限被做成了两种代理，而不是一段提醒。</p>
+        <p class="en"><code>build</code> has full access. <code>plan</code> refuses edits. Tab switches. Permission is a persona, not a reminder.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://github.com/deepseek-ai/deepseek-harness">DeepSeek Harness</a></h3>
+        <p><span class="tag">262,467 ★</span><span class="tag">CORDIS</span></p>
+        <p class="zh">一切皆插件。对话里可以写插件并安装。工作区、技能、子代理、定时、审批都是一等对象。仍是开发者预览，会破坏兼容。本报告写于这个运行时里。</p>
+        <p class="en">Everything is a plugin, including writing a plugin from chat. Workspace, skills, subagents, schedules, approvals. Developer preview, breaking changes expected. This report was written inside it.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://docs.x.ai/build/overview">Grok Build</a></h3>
+        <p><span class="tag">XAI</span><span class="tag">ACP</span></p>
+        <p class="zh">TUI、headless、ACP。可挂任意模型。<code>grok inspect</code> 列出技能、插件、hooks、MCP。技能文件夹与 Claude 生态同形。</p>
+        <p class="en">TUI, headless, and ACP. Bring any model. <code>grok inspect</code> lists skills, plugins, hooks, and MCP. Skill folders match the emerging standard.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://docs.x.ai/grok-bot/overview">Grok Bot</a></h3>
+        <p><span class="tag">CLOUD COMPUTER</span></p>
+        <p class="zh">有名字的队友，共用一台云电脑：浏览器、文件、终端。可互发消息、移交任务、把演示存成技能。合上笔记本继续。共享电脑意味着账号内 bot 都能看见放上去的登录态。</p>
+        <p class="en">Named teammates on one shared cloud computer. They message, hand off work, and save a demonstrated path as a skill. The laptop can close. Shared logins are visible to every bot on the account.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a></h3>
+        <p><span class="tag">257,343 ★</span><span class="tag">NOUS</span></p>
+        <p class="zh">学习回路是产品：从经验写技能，跨会话记忆，<code>SOUL.md</code>，20+ 消息平台，具名 bot，定时，多种终端后端包括 Daytona 和 Modal。</p>
+        <p class="en">The learning loop is the product: skills from experience, cross-session memory, <code>SOUL.md</code>, 20+ chat platforms, named bots, cron, and terminal backends from Docker to Modal.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://dev.meta.ai/docs/muse-code">Muse Code</a></h3>
+        <p><span class="tag">META</span><span class="tag">SANDBOX ON</span></p>
+        <p class="zh">首次运行即沙箱和批准。交互或 <code>muse exec</code>。工作流与子代理分开，生命周期最多 1,000 个子任务。本地会话之间可以交接和请求审查。</p>
+        <p class="en">Sandbox and approvals from the first run. Interactive or <code>muse exec</code>. Workflows are separate from subagents, capped at 1,000 child tasks. Live sessions can hand off and request review.</p>
+      </article>
+      <article class="card">
+        <h3><a href="https://github.com/affaan-m/ECC">ECC 与控制面</a></h3>
+        <p><span class="tag">289,613 ★</span></p>
+        <p class="zh">ECC、planning-with-files、claude-mem 优化记忆与规范。cc-switch、Orca、OpenHands 优化舰队。它们不替代上面的产品，它们管理那些产品。</p>
+        <p class="en">ECC, planning-with-files, and claude-mem optimize memory and norms. cc-switch, Orca, and OpenHands optimize the fleet. They manage the products above. They do not replace them.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="matrix">
+    <h2 class="zh">对照</h2><h2 class="en">Matrix</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th class="zh">状态放在哪</th><th class="en">Where state lives</th>
+          <th class="zh">扩展</th><th class="en">Extension</th>
+          <th class="zh">离开之后</th><th class="en">After you leave</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Claude Code</td><td class="zh">仓库 + 会话，云会话可选</td><td class="en">Repo + session, optional cloud</td><td>CLAUDE.md, skills, MCP, workflows</td><td class="zh">定时、云、CI</td><td class="en">Schedules, cloud, CI</td></tr>
+        <tr><td>Cowork</td><td class="zh">选定文件夹与工具</td><td class="en">Chosen folders and tools</td><td class="zh">插件包</td><td class="en">Plugin bundles</td><td class="zh">合盖继续、定时</td><td class="en">Laptop closed, cron</td></tr>
+        <tr><td>Design</td><td class="zh">设计系统 + 画布</td><td class="en">Design system + canvas</td><td class="zh">代码库导入、连接器</td><td class="en">Repo import, connectors</td><td class="zh">导出后交接</td><td class="en">Export and handoff</td></tr>
+        <tr><td>Duet</td><td class="zh">连接的应用与记忆</td><td class="en">Connected apps and memory</td><td class="zh">6,000+ 连接器</td><td class="en">6,000+ connectors</td><td class="zh">主动简报</td><td class="en">Proactive brief</td></tr>
+        <tr><td>Codex</td><td class="zh">本地或 Codex Web</td><td class="en">Local or Codex Web</td><td class="zh">开源 CLI，可被控制面接住</td><td class="en">Open CLI, hostable</td><td class="zh">云端代理</td><td class="en">Cloud agent</td></tr>
+        <tr><td>OpenCode</td><td class="zh">本地会话，plan/build</td><td class="en">Local session, plan/build</td><td class="zh">代理与配置</td><td class="en">Agents and config</td><td class="zh">桌面 beta</td><td class="en">Desktop beta</td></tr>
+        <tr><td>DeepSeek</td><td class="zh">工作区 + 插件运行时</td><td class="en">Workspace + plugin runtime</td><td class="zh">一切皆插件</td><td class="en">Everything is a plugin</td><td class="zh">定时、后台任务</td><td class="en">Schedules, background jobs</td></tr>
+        <tr><td>Grok Build</td><td class="zh">项目目录 + ~/.grok</td><td class="en">Project + ~/.grok</td><td>skills, plugins, hooks, MCP, LSP</td><td class="zh">headless / ACP</td><td class="en">Headless / ACP</td></tr>
+        <tr><td>Grok Bot</td><td class="zh">账号级云电脑</td><td class="en">Account cloud computer</td><td class="zh">演示即技能</td><td class="en">Demonstration becomes a skill</td><td class="zh">云端继续，bot 互交</td><td class="en">Cloud continues, bots coordinate</td></tr>
+        <tr><td>Hermes</td><td class="zh">记忆、技能、任意终端后端</td><td class="en">Memory, skills, any terminal backend</td><td>Agent Skills, MCP, SOUL.md</td><td class="zh">IM 网关 + cron</td><td class="en">Chat gateway + cron</td></tr>
+        <tr><td>Muse Code</td><td class="zh">本地沙箱，CI 用 exec</td><td class="en">Local sandbox, exec for CI</td><td class="zh">技能、hooks、MCP、SDK</td><td class="en">Skills, hooks, MCP, SDK</td><td class="zh">工作流可恢复编排</td><td class="en">Resumable workflow orchestration</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="practice">
+    <h2 class="zh">该抄的，不该抄的</h2>
+    <h2 class="en">What to copy</h2>
+    <div class="cards">
+      <article class="card">
+        <h3 class="zh">展开</h3><h3 class="en">Fan out</h3>
+        <p class="zh">迁移、审计、不稳定复现、多视角评审。每个假设一块干净上下文，另一路代理按量规挑错。Claude Code、Muse、DeepSeek teams、Grok Bot 群聊都在做这件事。</p>
+        <p class="en">Migrations, audits, flaky bugs, multi-perspective review. One clean context per hypothesis, and a second agent grading against a rubric.</p>
+      </article>
+      <article class="card">
+        <h3 class="zh">折叠</h3><h3 class="en">Fold</h3>
+        <p class="zh">一个函数、一块紧耦合的补丁。Anthropic 2026-10-22 写过：更少的子代理，加上渐进披露，往往又好又便宜。小改动不要上工作流。</p>
+        <p class="en">A function, or a tightly coupled patch. Anthropic’s October 2026 note: fewer subagents plus progressive disclosure is often better and cheaper.</p>
+      </article>
+      <article class="card">
+        <h3 class="zh">最小清单</h3><h3 class="en">Minimum loop</h3>
+        <p class="zh">先沙箱，再一个会失败的验收命令，再短规则文件，再技能文件夹，再磁盘计划。对外发送、删除、凭证单独批准。</p>
+        <p class="en">Sandbox first. Then a check that can fail. Then a short rule file, skill folders, and a plan on disk. Separate approval for sends, deletes, and credentials.</p>
+      </article>
+      <article class="card">
+        <h3 class="zh">两条路线</h3><h3 class="en">Two bets</h3>
+        <p class="zh">DeepSeek 把壳做成插件系统。Hermes 把壳做成学习回路。Grok Bot 把壳做成云电脑。Claude 把壳拆成 Code、Cowork、Design、Duet，共用判断和安全分类器。</p>
+        <p class="en">DeepSeek makes the shell a plugin system. Hermes makes it a learning loop. Grok Bot makes it a cloud computer. Claude splits it into Code, Cowork, Design, and Duet, sharing judgment and safety classifiers.</p>
+      </article>
+    </div>
+    <p class="meta zh">全文、星标表和链接在 <a href="docs/report.zh.md">docs/report.zh.md</a> 与 <a href="docs/sources.md">docs/sources.md</a>。</p>
+    <p class="meta en">The long form, star table, and links are in <a href="docs/report.en.md">docs/report.en.md</a> and <a href="docs/sources.md">docs/sources.md</a>.</p>
+  </section>
+</main>
+<footer>
+  <span class="zh">CC BY 4.0。产品名归各自所有者。引用星标前请重新请求 GitHub API。</span>
+  <span class="en">CC BY 4.0. Product names belong to their owners. Re-query the GitHub API before citing stars.</span>
+</footer>
+<script>
+  const body = document.body;
+  const zh = document.getElementById('zh');
+  const en = document.getElementById('en');
+  function setLang(lang) {
+    body.classList.toggle('en', lang === 'en');
+    document.documentElement.lang = lang === 'en' ? 'en' : 'zh';
+    zh.setAttribute('aria-pressed', lang === 'zh');
+    en.setAttribute('aria-pressed', lang === 'en');
+    try { localStorage.setItem('harness-lang', lang); } catch (e) {}
+  }
+  zh.addEventListener('click', () => setLang('zh'));
+  en.addEventListener('click', () => setLang('en'));
+  try {
+    if (localStorage.getItem('harness-lang') === 'en') setLang('en');
+  } catch (e) {}
+</script>
+</body>
+</html>
